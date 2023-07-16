@@ -5,12 +5,12 @@
 
 @font-face {
   font-family: 'Gilroy';
-  src: url("./assets/fonts/Gilroy-Semibold.ttf");
+  src: url("assets/fonts/Gilroy-Semibold.ttf");
 }
 
 @font-face {
   font-family: 'Merriweather';
-  src: url("./assets/fonts/Merriweather-Black.ttf");
+  src: url("assets/fonts/Merriweather-Black.ttf");
 }
 
 body {
