@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {AppService} from "./app.service";
 
@@ -10,6 +10,11 @@ import {AppService} from "./app.service";
 export class AppComponent {
 
   currency = '$'
+  loaderShowed = true
+  loader = true
+
+  orderImageStyle: any;
+  mainImageStyle: any;
 
   form = this.fb.group({
     order: ['', Validators.required],
@@ -20,10 +25,30 @@ export class AppComponent {
   productsData: any;
 
   ngOnInit() {
+    setTimeout(() => {
+      this.loaderShowed = false;
+    }, 3000)
+    setTimeout(() => {
+      this.loader = false;
+    }, 4000)
     this.appService.getData().subscribe(data => this.productsData = data)
   }
 
   constructor(private fb: FormBuilder, private appService: AppService) {
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(e: MouseEvent) {
+    if (this.isTouchDevice()) {
+      return; // Прерываем выполнение кода на сенсорных устройствах
+    }
+
+    this.orderImageStyle = {transform: 'translate(-' + ((e.clientX * 0.3) / 8) + 'px,-' + ((e.clientY * 0.3) / 8) + 'px'};
+    this.mainImageStyle = {transform: 'translate(-' + ((e.clientX * 0.3) / 8) + 'px,-' + ((e.clientY * 0.3) / 8) + 'px'};
+  }
+
+  isTouchDevice(): boolean {
+    return (('ontouchstart' in window) || !!navigator.maxTouchPoints);
   }
 
   scrollTo(target: HTMLElement, burger?: any) {
