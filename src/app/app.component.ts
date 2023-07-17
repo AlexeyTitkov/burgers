@@ -75,7 +75,6 @@ export class AppComponent {
           }
         )
 
-      alert('Спасибо за заказ! Мы скоро свяжемся с вами!')
       this.form.reset()
     }
   }
